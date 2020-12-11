@@ -1,7 +1,7 @@
 ﻿using Application.Queries;
 using Domain.Entities;
 using MediatR;
-using Persistence.RepositoryInterfaces;
+using Persistence.ServiceInterfaces;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -9,9 +9,9 @@ namespace Application.QueryHandlers
 {
     public class GetBikeByIdAsyncQueryHandler : IRequestHandler<GetBikeByIdAsyncQuery, Bike>
     {
-        private readonly IBikeRepository _bikeRepository;
+        private readonly IBikeService _bikeRepository;
 
-        public GetBikeByIdAsyncQueryHandler(IBikeRepository bikeRepository)
+        public GetBikeByIdAsyncQueryHandler(IBikeService bikeRepository)
         {
             _bikeRepository = bikeRepository;
         }
