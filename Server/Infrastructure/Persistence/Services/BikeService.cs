@@ -23,9 +23,9 @@ namespace Persistence.Services
             {
                 return await _context.Bikes.ToListAsync();
             }
-            catch(Exception e)
+            catch(ArgumentNullException e)
             {
-                throw new InvalidOperationException($"{e.Message}\tDatabase can't return collection of bikes.");
+                throw new ArgumentNullException($"{e.Message}\tDatabase has troubles with Bikes tabel.");
             }
         }
 
@@ -33,11 +33,16 @@ namespace Persistence.Services
         {
             try
             {
-                return await _context.Bikes.FindAsync(bikeId);
+                var bike = await _context.Bikes.FindAsync(bikeId);
+                if (bike == null) 
+                {
+                    throw new ArgumentNullException();
+                }
+                return bike;
             }
-            catch(Exception e)
+            catch(ArgumentNullException)
             {
-                throw new InvalidOperationException($"{e.Message}\tDatabase can't return specific bike by id.");
+                throw new ArgumentNullException($"Database hasn't got bike with id = {bikeId}.");
             }
         }
 
