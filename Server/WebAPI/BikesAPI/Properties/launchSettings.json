@@ -11,16 +11,16 @@
   "profiles": {
     "IIS Express": {
       "commandName": "IISExpress",
-      "launchBrowser": true,
-      "launchUrl": "",
+      "launchBrowser": false,
+      "launchUrl": "api/bikes",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
     "BikesAPI": {
       "commandName": "Project",
-      "launchBrowser": true,
-      "launchUrl": "",
+      "launchBrowser": false,
+      "launchUrl": "api/bikes",
       "applicationUrl": "https://localhost:5001;http://localhost:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
