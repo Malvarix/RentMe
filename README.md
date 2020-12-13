@@ -1,5 +1,17 @@
 <h2>RentMeApp - Preview</h2>
 <img src = https://user-images.githubusercontent.com/55942075/102016661-b0626c00-3d6a-11eb-9226-af9cad93ba6c.png>
+<h2>*Annotations*</h2>
+<ul><b>
+  <li>Connection string to DB is located in '..\Server\WebAPI\BikesAPI\appsettings.json'</li>
+  <li>If you wanna play with migrations please edit connection string in '..\Server\Infrastructure\Persistence\Contexts\BikesDbContext.cs' in default constructor</li>
+</ul></b>
+<h2>Git instructions</h2>
+<ul><b>
+  <li>[fix]: Fix description</li>
+  <li>[trans]: Description</br>*Annotation for [trans] - is Transitional/Intermediate/Unable to work right now</li>
+  <li>[doc]: Description</br>*Annotation for [doc] - README.md etc. files</li>
+  <li>[build]: Build description</br>*Annotation for [build] - for ready builds</li>
+</ul></b>
 <h2>Installation tutorial</h2>
 <h3>Client</h3>
 <ul><b>
