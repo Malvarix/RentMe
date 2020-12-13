@@ -31,15 +31,15 @@ namespace BikesAPI.Controllers
             }
         }
 
-        [HttpGet("{bikeId}")]
-        public async Task<IActionResult> GetBikeByIdAsync(int bikeId = 0)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetBikeByIdAsync(int id = 0)
         {
             try
             {
-                if (bikeId != 0)
-                    return Ok(await _mediator.Send(new GetBikeByIdAsyncQuery(bikeId)));
+                if (id != 0)
+                    return Ok(await _mediator.Send(new GetBikeByIdAsyncQuery(id)));
                 else
-                    throw new InvalidOperationException($"Bike with id = {bikeId} can't exist");
+                    throw new InvalidOperationException($"Bike with id = {id} can't exist");
             }
             catch (Exception e)
             {
@@ -64,14 +64,14 @@ namespace BikesAPI.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateBikeAsync(Bike bike)
+        public async Task<IActionResult> UpdateBikeStatusByIdAsync([FromBody]int id = 0)
         {
             try
             {
-                if (ModelState.IsValid)
-                    return Ok(await _mediator.Send(new UpdateBikeAsyncCommand(bike)));
+                if (id != 0)
+                    return Ok(await _mediator.Send(new UpdateBikeStatusByIdAsyncCommand(id)));
                 else
-                    throw new InvalidOperationException($"Bike model from client side is invalid");
+                    throw new InvalidOperationException($"Bike with id = {id} can't exist");
             }
             catch (Exception e)
             {
@@ -79,15 +79,15 @@ namespace BikesAPI.Controllers
             }
         }
 
-        [HttpDelete("{bikeId}")]
-        public async Task<IActionResult> DeleteBikeByIdAsync(int bikeId = 0)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteBikeByIdAsync(int id = 0)
         {
             try
             {
-                if (bikeId != 0)
-                    return Ok(await _mediator.Send(new DeleteBikeByIdAsyncCommand(bikeId)));
+                if (id != 0)
+                    return Ok(await _mediator.Send(new DeleteBikeByIdAsyncCommand(id)));
                 else
-                    throw new InvalidOperationException($"Bike with id = {bikeId} can't exist");
+                    throw new InvalidOperationException($"Bike with id = {id} can't exist");
             }
             catch (Exception e)
             {
