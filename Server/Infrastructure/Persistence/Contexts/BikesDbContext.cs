@@ -24,6 +24,7 @@ namespace Persistence.Contexts
             IOptions<BikesDbConfiguration> configOptions) : base(options)
         {
             _configuration = configOptions.Value;
+            Database.EnsureCreated();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
