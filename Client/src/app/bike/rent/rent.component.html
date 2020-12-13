@@ -1,0 +1,60 @@
+<h1>Awesome Bike Rental</h1>
+
+<div class="new-r">
+    <div class="icon nr-icon"></div>
+    <div class="nr-sign">Create new rent</div>
+</div>
+
+<div class="add-bike">
+    <div class="form-group">
+        <label>Bike name</label>
+        <input type="text" [(ngModel)]="bike.title" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Bike type</label>
+        <select [(ngModel)]="bike.type" class="form-control" >
+            <option value="Road">Road</option>
+            <option value="Mountain">Mountain</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Rent Price</label>
+        <input type="number" [(ngModel)]="bike.price" class="form-control" />
+    </div>
+    <div class="add-bt-wrap">
+        <input type="button" value="Submit rent" class="btn btn-success form-control btn-add" (click)="createBike()"/>
+    </div>
+</div>
+<br/>
+<div class="your-r">
+    <div class="icon yr-icon"></div>
+    <div class="yr-sign">Your rent : Rented bikes ({{rentedBikes?.length}}) / Total: ${{sumRent()}}</div>
+</div>
+
+<div *ngFor="let b of rentedBikes">
+    <div class="main-wrap">
+        <div class="left-wrap">
+            <h5>{{b?.title}} / {{b?.type}} / ${{b?.price}}</h5>
+        </div>
+        <div class="right-wrap">
+            <button class="btn btn-sm btn-danger btn-cancel" (click)="cancelBikeRentalById(b.id!)">Cancel</button>
+        </div>
+    </div>
+</div>
+<br/>
+<div class="available-h">
+    <div class="icon av-icon"></div>
+    <div class="av-sign">Available bikes ({{availableBikes?.length}})</div>
+</div>
+
+<div *ngFor="let b of availableBikes" class="available-b">
+    <div class="main-wrap">
+        <div class="left-wrap">
+            <h5>{{b?.title}} / {{b?.type}} / ${{b?.price}}</h5>
+        </div>
+        <div class="right-wrap">
+            <button class="btn btn-sm btn-primary btn-rent" (click)="rentBikeById(b.id!)">Rent</button>
+            <button class="btn btn-sm btn-danger btn-cancel" (click)="deleteBikeById(b.id!)">Delete</button>
+        </div>
+    </div>
+</div>
