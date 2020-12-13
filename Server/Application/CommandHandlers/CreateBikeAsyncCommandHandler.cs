@@ -7,7 +7,7 @@ using Domain.Entities;
 
 namespace Application.CommandHandlers
 {
-    public class CreateBikeAsyncCommandHandler : IRequest<CreateBikeAsyncCommand>
+    public class CreateBikeAsyncCommandHandler : IRequestHandler<CreateBikeAsyncCommand, Bike>
     {
         private readonly IBikeService _bikeService;
 
@@ -16,7 +16,7 @@ namespace Application.CommandHandlers
             _bikeService = bikeService;
         }
 
-        public async Task Handle(CreateBikeAsyncCommand command, CancellationToken cancellationToken)
+        public async Task<Bike> Handle(CreateBikeAsyncCommand command, CancellationToken cancellationToken)
         {
             var bike = new Bike()
             {
@@ -26,7 +26,7 @@ namespace Application.CommandHandlers
                 Status = command.Status
             };
 
-            await _bikeService.CreateBikeAsync(bike);
+            return await _bikeService.CreateBikeAsync(bike);
         }
     }
 }

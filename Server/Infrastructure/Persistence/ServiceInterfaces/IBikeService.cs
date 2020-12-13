@@ -8,8 +8,8 @@ namespace Persistence.ServiceInterfaces
     {
         Task<List<Bike>> GetBikesAsync();
         Task<Bike> GetBikeByIdAsync(int bikeId);
-        Task CreateBikeAsync(Bike bike);
-        Task UpdateBikeAsync(Bike bike);
-        Task DeleteBikeByIdAsync(int bikeId);
+        Task<Bike> CreateBikeAsync(Bike bike);
+        Task<Bike> UpdateBikeStatusByIdAsync(int bikeId);
+        Task<bool> DeleteBikeByIdAsync(int bikeId);
     }
 }

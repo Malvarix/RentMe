@@ -5,6 +5,7 @@ using Persistence.ServiceInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Domain.Enums;
 
 namespace Persistence.Services
 {
@@ -46,12 +47,13 @@ namespace Persistence.Services
             }
         }
 
-        public async Task CreateBikeAsync(Bike bike)
+        public async Task<Bike> CreateBikeAsync(Bike bike)
         {
             try
             {
                 await _context.AddAsync(bike);
                 await _context.SaveChangesAsync();
+                return bike;
             }
             catch (Exception e)
             {
@@ -59,12 +61,22 @@ namespace Persistence.Services
             }
         }
 
-        public async Task UpdateBikeAsync(Bike bike)
+        public async Task<Bike> UpdateBikeStatusByIdAsync(int bikeId)
         {
             try
             {
+                var bike = await GetBikeByIdAsync(bikeId);
+                if (bike.Status == Status.Free)
+                {
+                    bike.Status = Status.Rented;
+                }
+                else
+                {
+                    bike.Status = Status.Free;
+                }
                 _context.Update(bike);
                 await _context.SaveChangesAsync();
+                return bike;
             }
             catch (Exception e)
             {
@@ -72,16 +84,20 @@ namespace Persistence.Services
             }
         }
 
-        public async Task DeleteBikeByIdAsync(int bikeId)
+        public async Task<bool> DeleteBikeByIdAsync(int bikeId)
         {
             try
             {
-                var entity = await _context.Bikes.FirstOrDefaultAsync(b => b.Id == bikeId);
-
-                if (entity != default && entity != null)
+                var bike = await _context.Bikes.FirstOrDefaultAsync(b => b.Id == bikeId);
+                if (bike != default && bike != null)
                 {
-                    _context.Remove(bikeId);
+                    _context.Remove(bike);
                     await _context.SaveChangesAsync();
+                    return true;
+                } 
+                else
+                {
+                    throw new ArgumentNullException($"Database hasn't got bike with id = {bikeId}.");
                 }
             }
             catch (Exception e)
